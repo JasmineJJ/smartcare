@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg
+*.egg-info/
+*.sqlite3
+dist/
+build/
+
+# Node
+node_modules/
+.next/
+
+# Environment / secrets
+.env
+.env.*
+
+# Docker volumes
+volumes/ 

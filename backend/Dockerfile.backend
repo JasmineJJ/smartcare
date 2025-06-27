@@ -1,0 +1,22 @@
+# syntax=docker/dockerfile:1
+
+FROM python:3.11-slim AS base
+
+# Disable .pyc files & enable unbuffered output
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+WORKDIR /app
+
+# Install Python deps first (better cache)
+COPY requirements.txt ./
+RUN pip install --upgrade pip && \
+    pip install -r requirements.txt
+
+# Copy project files
+COPY . .
+
+EXPOSE 8000
+
+# Default production command (overridden in docker-compose for dev)
+CMD ["gunicorn", "smartcare.wsgi:application", "--bind", "0.0.0.0:8000"] 
