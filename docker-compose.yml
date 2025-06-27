@@ -17,7 +17,9 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile.backend
-    command: ./entrypoint.sh
+    command: >
+      sh -c "python manage.py makemigrations && python manage.py migrate && \
+             python manage.py runserver 0.0.0.0:8000"
     volumes:
       - ./backend:/app
     env_file:
