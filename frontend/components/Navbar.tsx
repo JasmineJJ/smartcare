@@ -7,6 +7,7 @@ import {
   XMarkIcon,
   GlobeAltIcon,
 } from "@heroicons/react/24/outline";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -89,6 +90,7 @@ export default function Navbar() {
             >
               NEWS & UPDATES
             </Link>
+ 
           </div>
 
           {/* Search and Mobile Menu */}
@@ -134,6 +136,7 @@ export default function Navbar() {
             <Link href="/news" className="block text-white hover:text-teal-200 py-2">
               NEWS & UPDATES / الأخبار
             </Link>
+
           </div>
         </div>
       )}

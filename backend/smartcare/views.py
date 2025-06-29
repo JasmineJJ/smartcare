@@ -15,7 +15,7 @@ def register_user(request):
     '''Register a new user'''
     try:
         data = request.data
-        logger.info(f'Registration attempt: {data.get("username", "unknown")}')
+        logger.info(f'Registration attempt: {data.get(username, unknown)}')
         
         # Basic validation
         required_fields = ['username', 'email', 'password', 'first_name', 'last_name']

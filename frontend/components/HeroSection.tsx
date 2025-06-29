@@ -10,6 +10,9 @@ import {
   ChartBarIcon,
   PhoneIcon,
 } from "@heroicons/react/24/outline";
+import Image from "next/image";
+import Logo from "../assets/cnss-logo.png";
+import { useAuth } from "../contexts/AuthContext";
 
 interface ServiceTile {
   title: string;
@@ -65,6 +68,8 @@ const services: ServiceTile[] = [
 ];
 
 export default function HeroSection() {
+  const { isAuthenticated } = useAuth();
+
   return (
     <div className="relative">
       {/* Hero Background with City Skyline */}
@@ -84,7 +89,7 @@ export default function HeroSection() {
               <div className="mb-8">
                 <div className="flex items-center mb-4">
                   <div className="bg-white p-3 rounded-lg shadow-lg mr-4">
-                    <div className="text-teal-600 font-bold text-2xl">CNSS</div>
+                    <Image src={Logo} alt="CNSS Logo" width={64} height={64} />
                   </div>
                   <div>
                     <h1 className="text-4xl md:text-5xl font-bold leading-tight">TOP</h1>
@@ -119,6 +124,13 @@ export default function HeroSection() {
                   <div className="text-xs text-teal-200">الدعم الفني</div>
                 </div>
               </div>
+
+              {!isAuthenticated && (
+                <div className="mt-8 flex gap-4">
+                  <Link href="/login" className="bg-white text-teal-800 font-bold px-6 py-3 rounded-lg shadow hover:bg-teal-50">Login</Link>
+                  <Link href="/signup" className="bg-yellow-400 text-gray-900 font-bold px-6 py-3 rounded-lg shadow hover:bg-yellow-300">Register</Link>
+                </div>
+              )}
             </div>
 
             {/* Right Side - Service Grid */}

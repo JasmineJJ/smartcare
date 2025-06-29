@@ -9,13 +9,21 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def test_endpoint(request):
+    return Response({
+        'message': 'SmartCare API test endpoint is working!',
+        'method': request.method,
+        'status': 'success'
+    })
+
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def register_user(request):
-    '''Register a new user'''
     try:
         data = request.data
-        logger.info(f'Registration attempt: {data.get("username", "unknown")}')
+        logger.info(f'Registration attempt: {data.get(username, unknown)}')
         
         # Basic validation
         required_fields = ['username', 'email', 'password', 'first_name', 'last_name']
@@ -83,7 +91,6 @@ def register_user(request):
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def login_user(request):
-    '''Login user'''
     try:
         username = request.data.get('username')
         password = request.data.get('password')
@@ -138,7 +145,6 @@ def login_user(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_user_profile(request):
-    '''Get user profile'''
     user = request.user
     return Response({
         'user': {
