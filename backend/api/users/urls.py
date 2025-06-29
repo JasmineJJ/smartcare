@@ -1,8 +1,10 @@
-"""Auth-related routes."""
 from django.urls import path
-
-from .views import RegisterView
+from rest_framework_simplejwt.views import TokenRefreshView
+from . import views
 
 urlpatterns = [
-    path("signup/", RegisterView.as_view(), name="user_signup"),
-] 
+    path('register/', views.register_user, name='register'),
+    path('login/', views.login_user, name='login'),
+    path('profile/', views.get_user_profile, name='profile'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+]
